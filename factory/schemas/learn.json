@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["legit_failures", "task_problems", "painpoint_verdicts", "summary"],
+  "properties": {
+    "legit_failures": { "type": "integer" },
+    "task_problems": { "type": "array", "items": { "type": "string" } },
+    "painpoint_verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "verdict", "note"],
+        "properties": {
+          "id": { "type": "string" },
+          "verdict": { "type": "string", "enum": ["confirmed", "refuted", "inconclusive"] },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "summary": { "type": "string" }
+  }
+}

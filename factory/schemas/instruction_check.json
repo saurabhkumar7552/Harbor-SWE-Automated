@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["leaks", "rewrite", "new_instruction", "consistency_notes", "summary"],
+  "properties": {
+    "leaks": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["quote", "kind", "why"],
+        "properties": {
+          "quote": { "type": "string", "description": "the exact text from instruction.md" },
+          "kind": { "type": "string", "enum": ["code_name", "root_cause_or_fix", "listed_cases", "test_recipe", "scope_hint", "other"] },
+          "why": { "type": "string", "description": "what it reveals, e.g. the rg hit it leads to" }
+        }
+      }
+    },
+    "rewrite": { "type": "boolean" },
+    "new_instruction": { "type": "string", "description": "full new instruction.md when rewrite is true, else empty" },
+    "consistency_notes": { "type": "string", "description": "how every tested behavior stays implied by the (new) instruction" },
+    "summary": { "type": "string" }
+  }
+}

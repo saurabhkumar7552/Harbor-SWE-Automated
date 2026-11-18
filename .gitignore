@@ -1,0 +1,10 @@
+# Local-only: repo clones, scratch, factory state and logs
+factory/work/
+# Sol run outputs and reports
+jobs/
+harbour-test/
+# Benchmark tasks hold hidden tests and reference solutions: keep them out of public repos
+tasks/
+__pycache__/
+*.pyc
+.eval/

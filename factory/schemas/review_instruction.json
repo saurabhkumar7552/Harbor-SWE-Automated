@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["approve", "problems", "test_basis", "summary"],
+  "properties": {
+    "approve": { "type": "boolean" },
+    "problems": { "type": "array", "items": { "type": "string" }, "description": "concrete problems; empty when approved" },
+    "test_basis": {
+      "type": "array",
+      "description": "one entry per hidden test (or test group): the sentence of the new instruction or the repo contract that implies it",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["test", "basis"],
+        "properties": { "test": { "type": "string" }, "basis": { "type": "string" } }
+      }
+    },
+    "summary": { "type": "string" }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["issues_addressed", "issues_not_addressed", "nop_reward", "oracle_reward", "f2p_failing_on_base", "open_problems"],
+  "properties": {
+    "issues_addressed": { "type": "array", "items": { "type": "string" } },
+    "issues_not_addressed": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["issue", "reason"],
+        "properties": { "issue": { "type": "string" }, "reason": { "type": "string" } }
+      }
+    },
+    "nop_reward": { "type": "integer" },
+    "oracle_reward": { "type": "integer" },
+    "f2p_failing_on_base": { "type": "array", "items": { "type": "string" } },
+    "open_problems": { "type": "array", "items": { "type": "string" } }
+  }
+}

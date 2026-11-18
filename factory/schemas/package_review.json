@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["issues", "difficulty_assessment", "summary"],
+  "properties": {
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["severity", "file", "problem", "fix"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["blocker", "major", "minor"] },
+          "file": { "type": "string" },
+          "problem": { "type": "string" },
+          "fix": { "type": "string" }
+        }
+      }
+    },
+    "difficulty_assessment": { "type": "string", "description": "how Sol would most likely approach the packaged task and whether it would pass" },
+    "summary": { "type": "string" }
+  }
+}

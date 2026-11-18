@@ -1,0 +1,6 @@
+services:
+  main:
+    image: harbor-brace-codex-runtime:0.167.2
+    build:
+      context: /mnt/f/GITHUB/DataOrigin_SWE/harbor_pipeline/infrastructure/codex-runtime
+      dockerfile: Dockerfile

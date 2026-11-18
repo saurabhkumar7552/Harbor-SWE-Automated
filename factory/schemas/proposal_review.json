@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sol_attack_path",
+    "predicted_outcome",
+    "premature_done",
+    "findings",
+    "hardening_round",
+    "single_interpretation_ok",
+    "summary"
+  ],
+  "properties": {
+    "premature_done": {
+      "type": "string",
+      "description": "what a 'done too early' partial solution looks like, and which hidden test catches it (or that none does)"
+    },
+    "sol_attack_path": {
+      "type": "string",
+      "description": "step by step: the fastest way GPT-6.1 Sol would solve this, with the commands it would run first"
+    },
+    "predicted_outcome": {
+      "type": "string",
+      "enum": [
+        "likely_PPP",
+        "likely_mixed",
+        "likely_FFF"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "severity",
+          "problem",
+          "hardening"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "too_easy",
+              "needs_new_defect",
+              "instruction_leak",
+              "ambiguity",
+              "test_gap",
+              "implementation_coupled_test",
+              "not_hermetic",
+              "upstream_leak",
+              "correctness",
+              "other"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "major",
+              "minor"
+            ]
+          },
+          "problem": {
+            "type": "string"
+          },
+          "hardening": {
+            "type": "string",
+            "description": "concrete change M1 must make"
+          }
+        }
+      }
+    },
+    "hardening_round": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ordered list of concrete changes for the single revision"
+    },
+    "single_interpretation_ok": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}

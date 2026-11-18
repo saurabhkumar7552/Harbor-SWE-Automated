@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposals"],
+  "properties": {
+    "proposals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/proposal" }
+    }
+  },
+  "$defs": {
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id", "title", "pain_points", "subsystem", "defect_summary", "root_cause",
+        "why_sol_struggles", "user_symptoms", "instruction_outline", "fix_plan",
+        "hidden_tests", "traps", "test_packages", "upstream_check_files", "sol_minutes_estimate"
+      ],
+      "properties": {
+        "task_id": { "type": "string", "description": "kebab-case, prefixed with the repo name, e.g. harbor-xxx-yyy" },
+        "title": { "type": "string" },
+        "pain_points": { "type": "array", "items": { "type": "string" }, "description": "IDs from painpoints.md, at least 2" },
+        "subsystem": { "type": "string", "description": "area of the repo; must differ from existing tasks and other slate entries" },
+        "defect_summary": { "type": "string", "description": "INTERNAL: the real defect(s), precisely" },
+        "root_cause": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["file", "symbol", "why_wrong"],
+            "properties": { "file": { "type": "string" }, "symbol": { "type": "string" }, "why_wrong": { "type": "string" } }
+          }
+        },
+        "why_sol_struggles": { "type": "string", "description": "concrete argument tied to pain-point IDs; how the naive fix fails" },
+        "user_symptoms": { "type": "string", "description": "what a user/operator observes, in user/API terms only" },
+        "instruction_outline": { "type": "string", "description": "issue-style text plan: symptoms + expected behavior, NO subsystem/file/function names" },
+        "fix_plan": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["file", "change"],
+            "properties": { "file": { "type": "string" }, "change": { "type": "string" } }
+          }
+        },
+        "hidden_tests": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["name", "kind", "package", "checks"],
+            "properties": {
+              "name": { "type": "string" },
+              "kind": { "type": "string", "enum": ["FAIL_TO_PASS", "PASS_TO_PASS"] },
+              "package": { "type": "string" },
+              "checks": { "type": "string" }
+            }
+          }
+        },
+        "traps": { "type": "array", "items": { "type": "string" }, "description": "plausible shortcut fixes and which hidden test catches each" },
+        "test_packages": { "type": "array", "items": { "type": "string" }, "description": "packages the verifier runs; must run without databases/network" },
+        "upstream_check_files": { "type": "array", "items": { "type": "string" } },
+        "sol_minutes_estimate": { "type": "integer" }
+      }
+    }
+  }
+}
